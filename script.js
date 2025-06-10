@@ -60,4 +60,68 @@ function drawOmikuji() {
   const detail = document.getElementById("fortuneDetails");
 
   stick.classList.remove("show");
-  setTimeo
+  setTimeout(() => {
+    stick.textContent = result;
+    stick.classList.add("show");
+    localStorage.setItem("lastDraw", now.toISOString());
+
+    const fortunes = fortuneDetails[result];
+    detail.innerHTML = `
+      <p><strong>恋愛：</strong>${fortunes.恋愛}</p>
+      <p><strong>学業：</strong>${fortunes.学業}</p>
+      <p><strong>仕事：</strong>${fortunes.仕事}</p>
+    `;
+  }, 50);
+}
+
+function switchTab(event, tabName) {
+  document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+  document.getElementById(tabName).style.display = 'block';
+  event.target.classList.add('active');
+}
+
+const tarotCards = [
+  "愚者：新しい始まり、自由、無計画",
+  "魔術師：可能性、創造、集中力",
+  "女教皇：直感、神秘、秘密",
+  "女帝：豊かさ、育成、愛情",
+  "皇帝：支配、安定、責任",
+  "恋人：選択、愛、調和",
+  "戦車：勝利、行動、意志力"
+];
+
+function drawCard() {
+  const now = new Date();
+  const lastDrawStr = localStorage.getItem("lastTarotDraw");
+  const lastDraw = lastDrawStr ? new Date(lastDrawStr) : null;
+
+  if (lastDraw && isSameDay(now, lastDraw)) {
+    alert("まだ次のタロット占いが可能になっていません。\n明日の0:00以降にもう一度お試しください。");
+    return;
+  }
+
+  const randomIndex = Math.floor(Math.random() * tarotCards.length);
+  const resultDiv = document.getElementById("result");
+  resultDiv.innerHTML = `<p>${tarotCards[randomIndex]}</p>`;
+  localStorage.setItem("lastTarotDraw", now.toISOString());
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  const now = new Date();
+
+  const lastOmikujiDrawStr = localStorage.getItem("lastDraw");
+  const lastOmikujiDraw = lastOmikujiDrawStr ? new Date(lastOmikujiDrawStr) : null;
+  if (lastOmikujiDraw && isSameDay(now, lastOmikujiDraw)) {
+    drawButton.disabled = true;
+    drawButton.textContent = "今日はもう引けません";
+  }
+
+  const tarotButton = document.querySelector("#tarot button");
+  const lastTarotDrawStr = localStorage.getItem("lastTarotDraw");
+  const lastTarotDraw = lastTarotDrawStr ? new Date(lastTarotDrawStr) : null;
+  if (lastTarotDraw && isSameDay(now, lastTarotDraw)) {
+    tarotButton.disabled = true;
+    tarotButton.textContent = "今日はもう引けません";
+  }
+});
