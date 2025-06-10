@@ -1,12 +1,50 @@
 body {
-  font-family: 'Yu Gothic', sans-serif;
+  font-family: 'Sawarabi Mincho', 'Yu Mincho', 'Yu Gothic', serif;
   background: #fffbe6;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   height: 100vh;
   margin: 0;
+  padding-top: 70px;
+}
+
+.navbar {
+  width: 100%;
+  background-color: #f4e2d8;
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid #ccc;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  height: 60px;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: 'Sawarabi Mincho', 'Yu Mincho', 'Yu Gothic', serif;
+}
+
+.tab-button.active {
+  border-bottom: 3px solid #e63946;
+  color: #e63946;
+}
+
+.tab-content {
+  display: none;
+}
+
+#omikuji,
+#tarot {
+  display: block;
 }
 
 h1 {
@@ -37,6 +75,7 @@ h1 {
   line-height: 60px;
   transition: height 1s ease, top 1s ease;
   overflow: hidden;
+  font-family: 'Sawarabi Mincho', 'Yu Mincho', 'Yu Gothic', serif;
 }
 
 .show {
@@ -52,8 +91,27 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-family: 'Sawarabi Mincho', 'Yu Mincho', 'Yu Gothic', serif;
+}
+
+button:disabled {
+  background: gray;
+  cursor: not-allowed;
 }
 
 button:hover {
   background: #d62828;
+}
+
+.details {
+  font-size: 16px;
+  margin-top: 20px;
+  max-width: 300px;
+  text-align: left;
+  background: #fffef7;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  font-family: 'Sawarabi Mincho', 'Yu Mincho', 'Yu Gothic', serif;
 }
