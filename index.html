@@ -1,117 +1,42 @@
-body {
-  font-family: 'Sawarabi Mincho', 'Yu Mincho', 'Yu Gothic', serif;
-  background: #fffbe6;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  height: 100vh;
-  margin: 0;
-  padding-top: 70px;
-}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>占いサイト</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&display=swap" rel="stylesheet">
+</head>
+<body>
 
-.navbar {
-  width: 100%;
-  background-color: #f4e2d8;
-  display: flex;
-  justify-content: center;
-  border-bottom: 2px solid #ccc;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  height: 60px;
-}
+  <!-- ナビゲーションバー -->
+  <nav class="navbar">
+    <button class="tab-button active" onclick="switchTab(event, 'omikuji')">おみくじ</button>
+    <button class="tab-button" onclick="switchTab(event, 'tarot')">タロット占い</button>
+  </nav>
 
-.tab-button {
-  background: none;
-  border: none;
-  padding: 15px 30px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  font-family: 'Sawarabi Mincho', 'Yu Mincho', 'Yu Gothic', serif;
-}
+  <!-- おみくじ画面 -->
+  <div id="omikuji" class="tab-content">
+    <h1>おみくじを引こう！</h1>
+    <div class="box">
+      <div class="stick" id="omikujiResult">大吉</div>
+    </div>
+    <div id="fortuneDetails" class="details"></div>
+    <button onclick="drawOmikuji()">おみくじを引く</button>
+  </div>
 
-.tab-button.active {
-  border-bottom: 3px solid #e63946;
-  color: #e63946;
-}
+  <!-- タロット占い画面 -->
+  <div id="tarot" class="tab-content" style="display: none;">
+    <div class="container">
+      <h1>🔮 タロット占い（1枚引き）</h1>
+      <p>心の中で質問を思い浮かべて、「カードを引く」ボタンを押してください。</p>
+      <button onclick="drawCard()">カードを引く</button>
+      <div class="result" id="result">
+        <p>結果がここに表示されます。</p>
+      </div>
+    </div>
+  </div>
 
-.tab-content {
-  display: none;
-}
-
-#omikuji,
-#tarot {
-  display: block;
-}
-
-h1 {
-  margin-bottom: 20px;
-}
-
-.box {
-  position: relative;
-  width: 100px;
-  height: 200px;
-  background: #dcbf9e;
-  clip-path: polygon(30% 0%, 70% 0%, 100% 25%, 100% 75%, 70% 100%, 30% 100%, 0% 75%, 0% 25%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 30px;
-}
-
-.stick {
-  position: absolute;
-  top: 90%;
-  width: 60px;
-  height: 0;
-  background: white;
-  border: 2px solid black;
-  font-size: 20px;
-  text-align: center;
-  line-height: 60px;
-  transition: height 1s ease, top 1s ease;
-  overflow: hidden;
-  font-family: 'Sawarabi Mincho', 'Yu Mincho', 'Yu Gothic', serif;
-}
-
-.show {
-  height: 60px;
-  top: 50%;
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background: #e63946;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-family: 'Sawarabi Mincho', 'Yu Mincho', 'Yu Gothic', serif;
-}
-
-button:disabled {
-  background: gray;
-  cursor: not-allowed;
-}
-
-button:hover {
-  background: #d62828;
-}
-
-.details {
-  font-size: 16px;
-  margin-top: 20px;
-  max-width: 300px;
-  text-align: left;
-  background: #fffef7;
-  border: 1px solid #ccc;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  font-family: 'Sawarabi Mincho', 'Yu Mincho', 'Yu Gothic', serif;
-}
+  <script src="script.js"></script>
+</body>
+</html>
